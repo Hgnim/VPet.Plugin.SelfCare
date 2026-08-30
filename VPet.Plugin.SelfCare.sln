@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.14.37216.2 d17.14
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VPet.Plugin.SelfCare", "VPet.Plugin.SelfCare\VPet.Plugin.SelfCare.csproj", "{55926162-0581-437B-B152-05D4F5C0CF2C}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{55926162-0581-437B-B152-05D4F5C0CF2C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{55926162-0581-437B-B152-05D4F5C0CF2C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{55926162-0581-437B-B152-05D4F5C0CF2C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{55926162-0581-437B-B152-05D4F5C0CF2C}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {325AACF3-6111-4506-8696-0C14D3AC66F7}
+	EndGlobalSection
+EndGlobal
