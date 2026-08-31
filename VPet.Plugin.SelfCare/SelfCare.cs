@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Timers;
+using System.Windows;
 using VPet.Plugin.VpetAPI;
 using VPet_Simulator.Core;
 using VPet_Simulator.Windows.Interface;
@@ -36,34 +37,51 @@ namespace VPet.Plugin.SelfCare
 		}
 
 		void DoWork() {
+			MessageBox.Show("test");
 			if (MW.GameSavesData.GameSave.Feeling / MW.GameSavesData.GameSave.FeelingMax > 2 / 3) {
 				int sOrP = ran.Next(0, 1 + 1);
 				switch (sOrP) {
 					case 0: {
-							int i = ran.Next(0, ws.Count);
+							int i;
+							do {
+								i = ran.Next(0, ws.Count);
+								MessageBox.Show(i.ToString());
+							} while ((ws[i].LevelLimit > MW.GameSavesData.GameSave.Level));
 							MW.Main.StartWork(lla.AdjustBeforeStart((Work)ws[i].Clone()));
+							MessageBox.Show(ws[i].Name);
 						}break;
 					case 1:
 					default:{
-							int i = ran.Next(0, ss.Count);
+							int i;
+							do {
+								i = ran.Next(0, ss.Count);
+								MessageBox.Show(i.ToString());
+							} while (ss[i].LevelLimit > MW.GameSavesData.GameSave.Level);
 							MW.Main.StartWork(lla.AdjustBeforeStart((Work)ss[i].Clone()));
-						}break;
+							MessageBox.Show(ss[i].Name);
+						}
+						break;
 				}
 			}
 			else {
-				int i = ran.Next(0, ps.Count);
+				int i ;
+				do {
+					i = ran.Next(0, ps.Count);
+					MessageBox.Show(i.ToString());
+				} while (ps[i].LevelLimit > MW.GameSavesData.GameSave.Level);
 				MW.Main.StartWork(lla.AdjustBeforeStart((Work)ps[i].Clone()));
+				MessageBox.Show(ps[i].Name);
 			}
 		}
 
 		
 
-		Work nowWork = null;
+		bool isWork = false;
 		void WorkStart(Work work) {
-			nowWork = work;
+			isWork = true;
 		}
 		void WorkEnd(FinishWorkInfo finishWorkInfo) {
-			nowWork = null;
+			isWork = false;
 		}
 
 		ushort waitTick = 0;
@@ -74,7 +92,7 @@ namespace VPet.Plugin.SelfCare
 		void TickElapsed(object sender, ElapsedEventArgs e) {
 			/*if (MW.Main.NowWork != null) {
 			}*/
-			if (nowWork == null) {
+			if (!isWork) {
 				if (waitTick == 0) {
 					waitTick = (ushort)ran.Next(1, 5);
 					waitTick_growth = 0;
@@ -83,6 +101,8 @@ namespace VPet.Plugin.SelfCare
 					if (waitTick != waitTick_growth)
 						waitTick_growth++;
 					else {
+						//MessageBox.Show("start");
+						isWork = true;
 						DoWork();
 						waitTick = 0;
 					}
