@@ -99,7 +99,9 @@ namespace VPet.Plugin.SelfCare
 		void TickElapsed(object sender, ElapsedEventArgs e) {
 			/*if (MW.Main.NowWork != null) {
 			}*/
-			if (!isWork) {
+			if (!isWork 
+				&& MW.GameSavesData.GameSave.Mode is IGameSave.ModeType.Nomal or IGameSave.ModeType.Happy or IGameSave.ModeType.PoorCondition
+				&& MW.Main.State==Main.WorkingState.Nomal) {
 				if (waitTick == 0) {
 					waitTick = (ushort)ran.Next(1, 5);
 					waitTick_growth = 0;
