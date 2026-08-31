@@ -28,10 +28,6 @@ jobs:
       with:
         dotnet-version: 8.0.x
 
-    #恢复NuGet包
-    - name: Restore NuGet Packages
-      run: dotnet restore
-
     - name: Publish build with 'FolderProfile'
       run: dotnet publish -p:PublishProfile=FolderProfile
 
