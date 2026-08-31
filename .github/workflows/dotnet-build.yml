@@ -1,0 +1,43 @@
+name: Build Project
+
+on:
+  push:
+    tags:
+      - 'v*' #开头带v的tag将触发工作流
+  workflow_dispatch:
+
+jobs:
+
+  workflows:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v4
+      with:
+        fetch-depth: 0
+        lfs: true #启用lfs支持
+
+    - name: Pull LFS files #拉取lfs中的实际文件
+      run: git lfs pull
+
+    # Install the .NET Core workload
+    - name: Install .NET Core 8.0
+      uses: actions/setup-dotnet@v4
+      with:
+        dotnet-version: 8.0.x
+
+    #恢复NuGet包
+    - name: Restore NuGet Packages
+      run: dotnet restore
+
+    - name: Publish build with 'FolderProfile'
+      run: dotnet publish -p:PublishProfile=FolderProfile
+
+    - name: Upload Build files
+      uses: actions/upload-artifact@v4
+      with:
+        name: release-bin_${{ github.ref_name }}
+        path: Vpet.Plugin.SelfCare/bin
+        if-no-files-found: error

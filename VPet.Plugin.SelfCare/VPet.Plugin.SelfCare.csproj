@@ -5,6 +5,20 @@
 	  <OutputType>Library</OutputType>
 	  <UseWPF>true</UseWPF>
 	  <ImportWindowsDesktopTargets>true</ImportWindowsDesktopTargets>
+
+	  <AssemblyVersion>1.0.0.0831</AssemblyVersion>
+	  <FileVersion>1.0.0.0831</FileVersion>
+	  <VersionPrefix>1.0.0.20260831</VersionPrefix>
+	  <VersionSuffix></VersionSuffix>
+
+	  <Authors>Hgnim</Authors>
+	  <Company>$(Authors)</Company>
+	  <Owners>$(Authors)</Owners>
+	  <Product>SelfCare</Product>
+	  <Title>桌宠自我照顾插件</Title>
+	  <AssemblyTitle>$(Title)</AssemblyTitle>
+	  <Description>SelfCare</Description>
+	  <AssemblyName>VPet.Plugin.SelfCare</AssemblyName>
   </PropertyGroup>
 
   <ItemGroup>
