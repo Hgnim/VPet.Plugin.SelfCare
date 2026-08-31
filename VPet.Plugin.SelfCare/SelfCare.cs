@@ -37,7 +37,7 @@ namespace VPet.Plugin.SelfCare
 		}
 
 		void DoWork() {
-			MessageBox.Show("test");
+			//MessageBox.Show("test");
 			if (MW.GameSavesData.GameSave.Feeling / MW.GameSavesData.GameSave.FeelingMax > 2 / 3) {
 				int sOrP = ran.Next(0, 1 + 1);
 				switch (sOrP) {
@@ -45,20 +45,25 @@ namespace VPet.Plugin.SelfCare
 							int i;
 							do {
 								i = ran.Next(0, ws.Count);
-								MessageBox.Show(i.ToString());
+								//MessageBox.Show(i.ToString());
 							} while ((ws[i].LevelLimit > MW.GameSavesData.GameSave.Level));
-							MW.Main.StartWork(lla.AdjustBeforeStart((Work)ws[i].Clone()));
-							MessageBox.Show(ws[i].Name);
+							//调用UI线程
+							MW.Dispatcher.Invoke(() =>
+								MW.Main.StartWork(lla.AdjustBeforeStart((Work)ws[i].Clone()))
+							);
+							//MessageBox.Show(ws[i].Name);
 						}break;
 					case 1:
 					default:{
 							int i;
 							do {
 								i = ran.Next(0, ss.Count);
-								MessageBox.Show(i.ToString());
+								//MessageBox.Show(i.ToString());
 							} while (ss[i].LevelLimit > MW.GameSavesData.GameSave.Level);
-							MW.Main.StartWork(lla.AdjustBeforeStart((Work)ss[i].Clone()));
-							MessageBox.Show(ss[i].Name);
+							MW.Dispatcher.Invoke(() =>
+								MW.Main.StartWork(lla.AdjustBeforeStart((Work)ss[i].Clone()))
+							);
+							//MessageBox.Show(ss[i].Name);
 						}
 						break;
 				}
@@ -67,10 +72,12 @@ namespace VPet.Plugin.SelfCare
 				int i ;
 				do {
 					i = ran.Next(0, ps.Count);
-					MessageBox.Show(i.ToString());
+					//MessageBox.Show(i.ToString());
 				} while (ps[i].LevelLimit > MW.GameSavesData.GameSave.Level);
-				MW.Main.StartWork(lla.AdjustBeforeStart((Work)ps[i].Clone()));
-				MessageBox.Show(ps[i].Name);
+				MW.Dispatcher.Invoke(() =>
+					MW.Main.StartWork(lla.AdjustBeforeStart((Work)ps[i].Clone()))
+				);
+				//MessageBox.Show(ps[i].Name);
 			}
 		}
 
